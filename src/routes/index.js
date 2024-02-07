@@ -1,5 +1,5 @@
 import { lazy } from "react";
-import { DETAIL, FAVORITE, HOME,SIGNUP,LOGIN } from "../config/constant/routePathConstants";
+import { DETAIL, FAVORITE, HOME,SIGNUP,LOGIN,PAYMENT } from "../config/constant/routePathConstants";
 import NotFound from "../components/NotFound";
 
 const HomeLayout = lazy(() => import("../container"))
@@ -8,6 +8,7 @@ const Favorites = lazy(() => import("../pages/WishList"));
 const ProductDetail = lazy(() => import("../pages/ProductDetail"));
 const Signup = lazy(() => import("../signup/SignupForm"));
 const Login = lazy(() => import("../login/LoginForm"));
+const Payment = lazy(() => import("../payment/PaymentForm"));
 
 
 
@@ -28,6 +29,10 @@ const MainRoutes = [
             {
                 path: SIGNUP,
                 element: <Signup />,
+            },
+            {
+                path: PAYMENT,
+                element: <Payment />,
             },
             {
                 path: LOGIN,

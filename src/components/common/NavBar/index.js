@@ -19,7 +19,15 @@ const NavBar = () => {
   const [favoriteCount, setFavoriteCount] = useState(0);
   const [imageLoading, setImageLoading] = useState(true);
   const isMobile = useMediaQuery("(max-width:768px)");
+  const [name, setName] = useState('');
+  //const logtext=name!=''
 
+  useEffect(() => {
+    const storedName = localStorage.getItem('name');
+    if (storedName) {
+      setName(storedName);
+    }
+  }, []);
   const { queries } = useSelector(productsSelector);
 
   useDebouncedEffect(
@@ -127,11 +135,13 @@ const NavBar = () => {
                   <span className="favorite-count">{favoriteCount}</span>
                 )}
               </li>
+              <li style={{ textAlign: 'center' }}><div>Welcome, {name}</div></li>
               {/* <div className="basket-wrapper">
                 <li onClick={() => handleMenuItemClick("/")}>Basket</li>
                 <ShoppingBasketOutlinedIcon />
               </div> */}
             </ul>
+            
           </div>
         </div>
       </div>

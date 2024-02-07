@@ -7,6 +7,7 @@ const DUMMY_JSON_API = "http://localhost:3001/api/v1/ecomproducts";
 
 export const fetchProductsApi = (setLoading, setImageLoading, queries) => async (dispatch) => {
   const { category, page, limit, query } = queries || {};
+  console.log("queryssssss",queries)
 
   let URL = `${DUMMY_JSON_API}`;
   if (query) {

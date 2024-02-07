@@ -26,9 +26,12 @@ const LoginForm = () => {
       // Assuming the server responds with a JSON containing the access token
       const data = await response.json();
       const accessToken = data.accessToken;
+      //const name=data.name
+      console.log("data issss",data.user.name)
 
       // Store access token in local storage or session storage
       localStorage.setItem('accessToken', accessToken);
+      localStorage.setItem('name',data.user.name)
 
       // Clear form data and error
       setFormData({ email: '', password: '' });
