@@ -20,14 +20,23 @@ const NavBar = () => {
   const [imageLoading, setImageLoading] = useState(true);
   const isMobile = useMediaQuery("(max-width:768px)");
   const [name, setName] = useState('');
-  //const logtext=name!=''
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     const storedName = localStorage.getItem('name');
     if (storedName) {
       setName(storedName);
+      setIsLoggedIn(true);
     }
   }, []);
+
+  const handleSignOut = () => {
+    localStorage.removeItem('name');
+    setName('');
+    setIsLoggedIn(false);
+    navigate(HOME);
+  };
+
   const { queries } = useSelector(productsSelector);
 
   useDebouncedEffect(
@@ -55,7 +64,6 @@ const NavBar = () => {
 
 
   const handleSearch = (e) => {
-
     dispatch(setQueries({ ...queries, query: e.target.value , category: ""}))
   }
 
@@ -126,16 +134,17 @@ const NavBar = () => {
           </div>
           <div className="admin-profile" id="admin-profile">
             <ul className="menus">
-              <li onClick={() => handleMenuItemClick("/")}>Account</li>
-              <li onClick={() => handleMenuItemClick("/Signup")}>Signup</li>
-              <li onClick={() => handleMenuItemClick("/Login")}>Login</li>
+              <li onClick={() => handleMenuItemClick("/")}>Home</li>
+              {!isLoggedIn && <li onClick={() => handleMenuItemClick("/Signup")}>Signup</li>}
+              {!isLoggedIn && <li onClick={() => handleMenuItemClick("/Login")}>Login</li>}
               <li className="favorite-icon-container" onClick={() => handleMenuItemClick("/favorites")}>
                 <span >Add to cart</span>
                 {favoriteCount > 0 && (
                   <span className="favorite-count">{favoriteCount}</span>
                 )}
               </li>
-              <li style={{ textAlign: 'center' }}><div>Welcome, {name}</div></li>
+              {name && <li style={{ textAlign: 'center' }}><div>Welcome, {name}</div></li>}
+              {isLoggedIn && <li onClick={handleSignOut}>Sign Out</li>}
               {/* <div className="basket-wrapper">
                 <li onClick={() => handleMenuItemClick("/")}>Basket</li>
                 <ShoppingBasketOutlinedIcon />

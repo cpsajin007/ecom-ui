@@ -6,8 +6,9 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import { local } from '../helpers/projectHelpers';
 import { fetchProductsByIdApi } from "../api";
 import { useParams } from 'react-router-dom';
-import { Typography, Card, CardMedia, Rating, } from '@mui/material';
+import { Typography, Card, CardMedia, Rating, Button } from '@mui/material';
 import { ProductDetailSkeleton } from '../components/Skeleton';
+import { Link } from "react-router-dom";
 
 const ProductDetail = () => {
   const { productId } = useParams();
@@ -25,7 +26,6 @@ const ProductDetail = () => {
 
   const handleToggleFavorite = () => {
     if (ProductByID) {
-      console.log("ppppp",ProductByID)
       if (isFavorite) {
         const newFavorites = favoriteValues.filter((fav) => fav?.id !== ProductByID?.id);
         dispatch(removeFromFavorites(ProductByID));
@@ -62,7 +62,6 @@ const ProductDetail = () => {
               </div>
               <div className="main-image">
                 <div className="product-image">
-                {console.log("ProductByID:", ProductByID)}
                   <img src={ProductByID.thumbnail} alt={ProductByID?.title} style={{ width: '100%', height: 'auto' }} />
                 </div>
               </div>
@@ -84,10 +83,15 @@ const ProductDetail = () => {
                 </button>
               </div>
               <Typography variant="body1">{ProductByID?.description}</Typography>
-              <Typography variant="body1" sx={{color:"green"}}>Discount: {ProductByID?.discount_percentage}%</Typography>
-              <Typography variant="body1" sx={{color:"red"}}>Stock: {ProductByID?.stock}</Typography>
+              <Typography variant="body1" sx={{ color: "green" }}>Discount: {ProductByID?.discount_percentage}%</Typography>
+              <Typography variant="body1" sx={{ color: "red" }}>Stock: {ProductByID?.stock}</Typography>
               <Typography variant="body1">Brand: {ProductByID?.brand}</Typography>
               <Typography variant="body1">Category: {ProductByID?.category}</Typography>
+              <Link to="/Payment">
+              <Button variant="contained" color="primary" onClick={() => { /* Handle proceed to payment action */ }}>
+                Proceed to Payment
+              </Button>
+              </Link>
             </div>
           </div>
         </>

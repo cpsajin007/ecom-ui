@@ -48,7 +48,7 @@ const LoginForm = () => {
 
   return (
     <div>
-      <h2>Login</h2>
+      <h2><center>Login</center></h2>
       <form onSubmit={handleSubmit} style={{ maxWidth: '300px', margin: '0 auto' }}>
   <div style={{ marginBottom: '10px' }}>
     <input 
